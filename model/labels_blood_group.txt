@@ -1,0 +1,8 @@
+0 AP
+1 AN
+2 BP
+3 BN
+4 ABP
+5 ABN
+6 OP
+7 ON

@@ -6,6 +6,7 @@ import streamlit as st
 from streamlit_option_menu import option_menu
 from PIL import Image, ImageOps
 from img_classification import teachable_machine_classification
+from tumor_img import teachable_machine_classification2
 
 
 # loading the saved models
@@ -34,8 +35,11 @@ with st.sidebar:
                            'High BP Prediction',
                            'Breast Cancer Prediction',
                            'Brain Tumor Prediction',
-                           'Mask Detection'],
-                          icons=['activity','heart','person','list','list','list','list','mask'],
+                           'Blood Group Detection',
+                           'Pneumonia Detection',
+                           'Mask Detection Capture Image',
+                           'Mask Detection Upload Image'],
+                          icons=['activity','heart','person','list','list','list','list','list','list','mask','mask'],
                           default_index=0)
     
     
@@ -417,8 +421,69 @@ if (selected == 'Brain Tumor Prediction'):
     
     st.success(label_diagnosis)
 
+
+#Blood Group Detection
+if (selected == 'Blood Group Detection'):
+    st.title("Image Classification")
+    st.header("Blood Group Classification")
+    st.text("Upload a scan for Classification")
+
+    #uploaded_file = st.camera_input("Choose a scan ...", key="firstCamera")
+    uploaded_file = st.file_uploader("Choose a scan ...", type="jpg")
+
+    label_diagnosis = ''
+    if uploaded_file is not None:
+        image = Image.open(uploaded_file)
+        st.image(image, caption='Uploaded Scan.', use_column_width=True)
+        st.write("")
+        st.write("Classifying...")
+        label_diagnosis = teachable_machine_classification2(
+            image, 'model/keras_model_blood_group.h5')
+        if label_diagnosis == 0:
+            label_diagnosis = 'A Positive'
+        elif label_diagnosis == 1:
+            label_diagnosis = 'A Negative'
+        elif label_diagnosis == 2:
+            label_diagnosis = 'B Positive'
+        elif label_diagnosis == 3:
+            label_diagnosis = 'B Negative'
+        elif label_diagnosis == 4:
+            label_diagnosis = 'AB Positive'
+        elif label_diagnosis == 5:
+            label_diagnosis = 'AB Negative'
+        elif label_diagnosis == 6:
+            label_diagnosis = 'O Positive'
+        elif label_diagnosis == 7:
+            label_diagnosis = 'O Negative'
+
+    st.success(label_diagnosis)
+
+
+#Pneumonia Detection
+if (selected == 'Pneumonia Detection'):
+    st.title("Image Classification")
+    st.header("Pneumonia image Classification")
+    st.text("Upload a scan for Classification")
+
+    #uploaded_file = st.camera_input("Choose a scan ...", key="firstCamera")
+    uploaded_file = st.file_uploader("Choose a scan ...", type="jpeg")
+
+    label_diagnosis = ''
+    if uploaded_file is not None:
+        image = Image.open(uploaded_file)
+        st.image(image, caption='Uploaded Scan.', use_column_width=True)
+        st.write("")
+        st.write("Classifying...")
+        label_diagnosis = teachable_machine_classification2(
+            image, 'model/keras_model_pneumonia.h5')
+        if label_diagnosis == 0:
+            label_diagnosis = 'Normal'
+        elif label_diagnosis == 1:
+            label_diagnosis = 'Pneumonia'
+    st.success(label_diagnosis)
+
 #Mask Detection
-if (selected == 'Mask Detection'):
+if (selected == 'Mask Detection Capture Image'):
     st.title("Image Classification")
     st.header("Mask Detection")
     st.text("Capture a Image for Classification")
@@ -440,6 +505,32 @@ if (selected == 'Mask Detection'):
             #st.write("Without Mask")
             label_diagnosis = 'The person has no Mask'
     
+    st.success(label_diagnosis)
+
+#Mask Detection upload image
+if (selected == 'Mask Detection Upload Image'):
+    st.title("Image Classification")
+    st.header("Mask Detection")
+    st.text("Capture a Image for Classification")
+
+    #uploaded_file = st.camera_input("Capture Image...", key="firstCamera")
+    uploaded_file = st.file_uploader("Choose a scan ...", type="jpg")
+
+    label_diagnosis = ''
+    if uploaded_file is not None:
+        image = Image.open(uploaded_file)
+        st.image(image, caption='Capture Image', use_column_width=True)
+        st.write("")
+        st.write("Detecting...")
+        label_diagnosis = teachable_machine_classification(
+            image, 'model/keras_model_mask.h5')
+        if label_diagnosis == 0:
+            #st.write("With Mask")
+            label_diagnosis = 'The person with Mask'
+        else:
+            #st.write("Without Mask")
+            label_diagnosis = 'The person has no Mask'
+
     st.success(label_diagnosis)
     
 
