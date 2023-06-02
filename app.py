@@ -74,19 +74,19 @@ if (selected == 'Diabetes Prediction'):
     
     
     # code for Prediction
-    diab_diagnosis = ''
+    diabetes_diagnosis = ''
     
     # creating a button for Prediction
     
     if st.button('Diabetes Test Result'):
-        diab_prediction = diabetes_model.predict([[Pregnancies, Glucose, BloodPressure, SkinThickness, Insulin, BMI, DiabetesPedigreeFunction, Age]])
+        diabetes_prediction = diabetes_model.predict([[Pregnancies, Glucose, BloodPressure, SkinThickness, Insulin, BMI, DiabetesPedigreeFunction, Age]])
         
-        if (diab_prediction[0] == 1):
-          diab_diagnosis = 'The person is diabetic'
+        if (diabetes_prediction[0] == 1):
+          diabetes_diagnosis = 'The person is diabetic'
         else:
-          diab_diagnosis = 'The person is not diabetic'
+          diabetes_diagnosis = 'The person is not diabetic'
         
-    st.success(diab_diagnosis)
+    st.success(diabetes_diagnosis)
 
 
 
