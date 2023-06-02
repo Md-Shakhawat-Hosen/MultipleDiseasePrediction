@@ -21,6 +21,7 @@ covid_model = pickle.load(open('trained_covid_model.sav','rb'))
 blood_model = pickle.load(open('trained_model_hbp.sav', 'rb'))
 
 
+
 # sidebar for navigation
 with st.sidebar:
     
@@ -415,7 +416,6 @@ if (selected == 'Brain Tumor Prediction'):
             label_diagnosis = 'No Tumor'
     
     st.success(label_diagnosis)
-
 
 #Mask Detection
 if (selected == 'Mask Detection'):
