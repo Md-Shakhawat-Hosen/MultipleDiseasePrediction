@@ -1,0 +1,2 @@
+0 pitutary tumor 1
+1 No tumor 2
