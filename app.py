@@ -423,8 +423,8 @@ if (selected == 'Mask Detection'):
     st.header("Mask Detection")
     st.text("Capture a Image for Classification")
     
-    #uploaded_file = st.camera_input("Capture Image...", key="firstCamera")
-    uploaded_file = st.file_uploader("Choose a scan ...", type="jpg")
+    uploaded_file = st.camera_input("Capture Image...", key="firstCamera")
+    #uploaded_file = st.file_uploader("Choose a scan ...", type="jpg")
     
     label_diagnosis = ''
     if uploaded_file is not None:
