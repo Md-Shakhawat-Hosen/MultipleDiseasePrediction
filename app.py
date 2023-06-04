@@ -283,13 +283,13 @@ if (selected == 'Covid-19 Prediction'):
     # creating a button for Prediction
 
     if st.button('COVID-19 Test Result'):
-        diab_prediction = covid_model.predict(
+        covid_prediction = covid_model.predict(
             [[idVal,Pregnancies, Glucose, BloodPressure]])
 
-        if (diab_prediction[0] == 1):
-          covid_diagnosis = 'The person COVID positive'
+        if (covid_prediction[0] == 1):
+          covid_diagnosis = 'The person Covid-19 Positive'
         else:
-          covid_diagnosis = 'The person COVID negative'
+          covid_diagnosis = 'The person Covid-19 Negative'
 
     st.success(covid_diagnosis)
 
@@ -357,10 +357,10 @@ if (selected == 'High BP Prediction'):
     # creating a button for Prediction
 
     if st.button('High Blood Pressure Test Result'):
-        diab_prediction = blood_model.predict(
+        blood_prediction = blood_model.predict(
             [[valId, pseudo_psu, pseudo_stratum, stat_weight, age, sex, race, body_weight, height, avg_systolic_bp, avg_diastolic_bp, smoked_alot, currently_smokes, smoking, serum_cholesterol]])
 
-        if (diab_prediction[0] == 1):
+        if (blood_prediction[0] == 1):
           blood_diagnosis = 'The person has no High Blood Pressure'
         else:
           blood_diagnosis = 'The person has High Blood Pressure'
