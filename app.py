@@ -21,6 +21,8 @@ covid_model = pickle.load(open('trained_covid_model.sav','rb'))
 
 blood_model = pickle.load(open('trained_model_hbp.sav', 'rb'))
 
+lung_model = pickle.load(open('trained_model_lung_cancer.sav', 'rb'))
+
 
 
 # sidebar for navigation
@@ -33,13 +35,14 @@ with st.sidebar:
                            'Parkinsons Prediction',
                            'Covid-19 Prediction',
                            'High BP Prediction',
+                           'Lung Cancer Prediction',
                            'Breast Cancer Prediction',
                            'Brain Tumor Prediction',
                            'Blood Group Detection',
                            'Pneumonia Detection',
                            'Mask Detection Capture Image',
                            'Mask Detection Upload Image'],
-                          icons=['activity','heart','person','list','list','list','list','list','list','mask','mask'],
+                           icons=['activity', 'heart', 'person', 'circle', 'activity', 'heart-fill', 'gender-female', "people-fill", "people-fill", "people-fill", 'mask', 'mask'],
                           default_index=0)
     
     
@@ -366,6 +369,79 @@ if (selected == 'High BP Prediction'):
           blood_diagnosis = 'The person has High Blood Pressure'
 
     st.success(blood_diagnosis)
+
+#Lung Cancer Prediction Page:
+
+if(selected == "Lung Cancer Prediction"):
+
+    #page title
+    st.title("Lung Cancer Prediction using Machine Learning")
+
+
+# getting the input data from the user
+    col1, col2, col3, col4 = st.columns(4)
+
+    with col1:
+        GENDER = st.text_input("GENDER")
+
+    with col2:
+        AGE = st.text_input("AGE")
+
+    with col3:
+        SMOKING = st.text_input("SMOKING")
+
+    with col4:
+        YELLOW_FINGERS = st.text_input("YELLOW_FINGERS")
+
+    with col1:
+        ANXIETY = st.text_input("ANXIETY")
+
+    with col2:
+        PEER_PRESSURE = st.text_input("PEER_PRESSURE")
+
+    with col3:
+        CHRONIC_DISEASE = st.text_input("CHRONIC DISEASE")
+
+    with col4:
+        FATIGUE = st.text_input("FATIGUE")
+
+    with col1:
+        ALLERGY = st.text_input("ALLERGY")
+
+    with col2:
+        WHEEZING = st.text_input("WHEEZING")
+
+    with col3:
+        ALCOHOL_CONSUMING = st.text_input("ALCOHOL CONSUMING")
+
+    with col4:
+        COUGHING = st.text_input("COUGHING")
+
+    with col1:
+        SHORTNESS_OF_BREATH = st.text_input("SHORTNESS OF BREATH")
+
+    with col2:
+        SWALLOWING_DIFFICULTY = st.text_input("SWALLOWING DIFFICULTY")
+
+    with col3:
+        CHEST_PAIN = st.text_input("CHEST PAIN")
+
+
+# code for Prediction
+    lung_cancer_result = " "
+
+    # creating a button for Prediction
+
+    if st.button("Lung Cancer Test Result"):
+        lung_cancer_report = lung_model.predict([[GENDER, AGE, SMOKING, YELLOW_FINGERS, ANXIETY, PEER_PRESSURE, CHRONIC_DISEASE,
+                                                 FATIGUE, ALLERGY, WHEEZING, ALCOHOL_CONSUMING, COUGHING, SHORTNESS_OF_BREATH, SWALLOWING_DIFFICULTY, CHEST_PAIN]])
+
+        if (lung_cancer_report[0] == 0):
+          lung_cancer_result = "Hurrah! You have no Lung Cancer."
+        else:
+          lung_cancer_result = "Sorry! You have Lung Cancer."
+
+    st.success(lung_cancer_result)
 
 # Breast Cancer
 if (selected == 'Breast Cancer Prediction'):
