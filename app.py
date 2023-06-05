@@ -11,17 +11,17 @@ from tumor_img import teachable_machine_classification2
 
 # loading the saved models
 
-diabetes_model = pickle.load(open('diabetes_model.sav', 'rb'))
+diabetes_model = pickle.load(open('ML_model/diabetes_model.sav', 'rb'))
 
-heart_disease_model = pickle.load(open('heart_disease_model.sav', 'rb'))
+heart_disease_model = pickle.load( open('ML_model/heart_disease_model.sav', 'rb'))
 
-parkinsons_model = pickle.load(open('parkinsons_model.sav', 'rb'))
+parkinsons_model = pickle.load(open('ML_model/parkinsons_model.sav', 'rb'))
 
-covid_model = pickle.load(open('trained_covid_model.sav','rb'))
+covid_model = pickle.load(open('ML_model/trained_covid_model.sav', 'rb'))
 
-blood_model = pickle.load(open('trained_model_hbp.sav', 'rb'))
+blood_model = pickle.load(open('ML_model/trained_model_hbp.sav', 'rb'))
 
-lung_model = pickle.load(open('trained_model_lung_cancer.sav', 'rb'))
+lung_model = pickle.load(open('ML_model/trained_model_lung_cancer.sav', 'rb'))
 
 
 
