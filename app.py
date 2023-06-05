@@ -41,8 +41,9 @@ with st.sidebar:
                            'Blood Group Detection',
                            'Pneumonia Detection',
                            'Mask Detection Capture Image',
-                           'Mask Detection Upload Image'],
-                           icons=['activity', 'heart', 'person', 'circle', 'activity', 'heart-fill', 'gender-female', "people-fill", "people-fill", "people-fill", 'mask', 'mask'],
+                           'Mask Detection Upload Image',
+                           'Skin Cancer Detection'],
+                           icons=['activity', 'heart', 'person', 'circle', 'activity', 'heart-fill', 'gender-female', "people-fill", "people-fill", "people-fill", 'mask', 'mask','people-fill'],
                           default_index=0)
     
     
@@ -587,7 +588,7 @@ if (selected == 'Mask Detection Capture Image'):
 if (selected == 'Mask Detection Upload Image'):
     st.title("Image Classification")
     st.header("Mask Detection")
-    st.text("Capture a Image for Classification")
+    st.text("Upload a Image for Classification")
 
     #uploaded_file = st.camera_input("Capture Image...", key="firstCamera")
     uploaded_file = st.file_uploader("Choose a scan ...", type="jpg")
@@ -606,6 +607,33 @@ if (selected == 'Mask Detection Upload Image'):
         else:
             #st.write("Without Mask")
             label_diagnosis = 'The person has no Mask'
+
+    st.success(label_diagnosis)
+
+
+#Skin Cancer Detection upload image
+if (selected == 'Skin Cancer Detection'):
+    st.title("Image Classification")
+    st.header("Skin Cancer Detection")
+    st.text("Upload a Image for Classification")
+
+    #uploaded_file = st.camera_input("Capture Image...", key="firstCamera")
+    uploaded_file = st.file_uploader("Choose a scan ...", type="jpg")
+
+    label_diagnosis = ''
+    if uploaded_file is not None:
+        image = Image.open(uploaded_file)
+        st.image(image, caption='Capture Image', use_column_width=True)
+        st.write("")
+        st.write("Detecting...")
+        label_diagnosis = teachable_machine_classification(
+            image, 'model/keras_model_skin_cancer.h5')
+        if label_diagnosis == 0:
+            #st.write("With Mask")
+            label_diagnosis = 'Benign'
+        else:
+            #st.write("Without Mask")
+            label_diagnosis = 'Malignant'
 
     st.success(label_diagnosis)
     
