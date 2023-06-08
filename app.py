@@ -38,12 +38,11 @@ with st.sidebar:
                            'Lung Cancer Prediction',
                            'Breast Cancer Prediction',
                            'Brain Tumor Prediction',
-                           'Blood Group Detection',
                            'Pneumonia Detection',
                            'Mask Detection Capture Image',
                            'Mask Detection Upload Image',
                            'Skin Cancer Detection'],
-                           icons=['activity', 'heart', 'person', 'circle', 'activity', 'heart-fill', 'gender-female', "people-fill", "people-fill", "people-fill", 'mask', 'mask','people-fill'],
+                           icons=['activity', 'heart', 'person', 'circle', 'activity', 'heart-fill', 'gender-female', "people-fill", "people-fill", 'mask', 'mask','people-fill'],
                           default_index=0)
     
     
@@ -500,40 +499,40 @@ if (selected == 'Brain Tumor Prediction'):
 
 
 #Blood Group Detection
-if (selected == 'Blood Group Detection'):
-    st.title("Image Classification")
-    st.header("Blood Group Classification")
-    st.text("Upload a scan for Classification")
+# if (selected == 'Blood Group Detection'):
+#     st.title("Image Classification")
+#     st.header("Blood Group Classification")
+#     st.text("Upload a scan for Classification")
 
-    #uploaded_file = st.camera_input("Choose a scan ...", key="firstCamera")
-    uploaded_file = st.file_uploader("Choose a scan ...", type="jpg")
+#     #uploaded_file = st.camera_input("Choose a scan ...", key="firstCamera")
+#     uploaded_file = st.file_uploader("Choose a scan ...", type="jpg")
 
-    label_diagnosis = ''
-    if uploaded_file is not None:
-        image = Image.open(uploaded_file)
-        st.image(image, caption='Uploaded Scan.', use_column_width=True)
-        st.write("")
-        st.write("Classifying...")
-        label_diagnosis = teachable_machine_classification2(
-            image, 'model/keras_model_blood_group.h5')
-        if label_diagnosis == 0:
-            label_diagnosis = 'A Positive'
-        elif label_diagnosis == 1:
-            label_diagnosis = 'A Negative'
-        elif label_diagnosis == 2:
-            label_diagnosis = 'B Positive'
-        elif label_diagnosis == 3:
-            label_diagnosis = 'B Negative'
-        elif label_diagnosis == 4:
-            label_diagnosis = 'AB Positive'
-        elif label_diagnosis == 5:
-            label_diagnosis = 'AB Negative'
-        elif label_diagnosis == 6:
-            label_diagnosis = 'O Positive'
-        elif label_diagnosis == 7:
-            label_diagnosis = 'O Negative'
+#     label_diagnosis = ''
+#     if uploaded_file is not None:
+#         image = Image.open(uploaded_file)
+#         st.image(image, caption='Uploaded Scan.', use_column_width=True)
+#         st.write("")
+#         st.write("Classifying...")
+#         label_diagnosis = teachable_machine_classification2(
+#             image, 'model/keras_model_blood_group.h5')
+#         if label_diagnosis == 0:
+#             label_diagnosis = 'A Positive'
+#         elif label_diagnosis == 1:
+#             label_diagnosis = 'A Negative'
+#         elif label_diagnosis == 2:
+#             label_diagnosis = 'B Positive'
+#         elif label_diagnosis == 3:
+#             label_diagnosis = 'B Negative'
+#         elif label_diagnosis == 4:
+#             label_diagnosis = 'AB Positive'
+#         elif label_diagnosis == 5:
+#             label_diagnosis = 'AB Negative'
+#         elif label_diagnosis == 6:
+#             label_diagnosis = 'O Positive'
+#         elif label_diagnosis == 7:
+#             label_diagnosis = 'O Negative'
 
-    st.success(label_diagnosis)
+#     st.success(label_diagnosis)
 
 
 #Pneumonia Detection
@@ -564,7 +563,6 @@ if (selected == 'Mask Detection Capture Image'):
     st.title("Image Classification")
     st.header("Mask Detection")
     st.text("Capture a Image for Classification")
-    
     uploaded_file = st.camera_input("Capture Image...", key="firstCamera")
     #uploaded_file = st.file_uploader("Choose a scan ...", type="jpg")
     
